@@ -43,8 +43,7 @@ def job(job_id):
 
 @app.route('/emplyer/<employer_id>')
 def employer():
-    employer = ('SELECT * FROM employer WHERE id=?',
-    [employer_id]), single=True)
+    employer = ('SELECT * FROM employer WHERE id=?',[employer_id]), single=True)
     jobs = 'SELECT job.id, job.title, job.description, job.salary FROM job JOIN employer ON employer.id = job.employer_id WHERE employer.id = ?', [employer_id])
     reviews ='SELECT review, rating, title, date, status FROM review JOIN employer ON employer.id = review.employer_id WHERE employer.id = ?', [employer_id])
     return render_template('employer.html', employer=employer, jobs=jobs, reviews=reviews)
